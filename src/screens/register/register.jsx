@@ -27,7 +27,7 @@ import {
         <View style={styles.formCon}>
           <TextInput style={styles.inputCon} placeholder={"Email Address"} />
           <TextInput style={styles.inputCon} placeholder={"Password"} secureTextEntry={true}/>
-          <Button title="Register" onPress={() => navigation.navigate('Home')}/>
+          <Button title="Register" onPress={() => navigation.navigate('HomePage')}/>
         </View>
         <View style={styles.infoCon}>
         <TouchableOpacity onPress={()=>navigation.navigate('Login')}>
