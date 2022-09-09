@@ -15,9 +15,22 @@ import {
   
   // it will be always staring a capital letter
   function Register({navigation}) {
-    const alertFunc = () => {
-      Alert.alert("hello", "hie how are you");
-    };
+    const dummyData=[
+      {
+        'name': 'Umair',
+        'gender': 'male',
+        'age': 22,
+        'city': 'Gujrat',
+        'img':"https://cdn.pixabay.com/photo/2016/05/17/22/16/baby-1399332__480.jpg"
+      },
+      {
+        'name': 'Ali',
+        'gender': 'male',
+        'age': 25,
+        'city': 'Zafarwal',
+        'img':"https://cdn.pixabay.com/photo/2012/03/04/00/36/baby-21971__480.jpg"
+      }
+    ]
     return (
       <View style={styles.container}>
        
@@ -27,7 +40,7 @@ import {
         <View style={styles.formCon}>
           <TextInput style={styles.inputCon} placeholder={"Email Address"} />
           <TextInput style={styles.inputCon} placeholder={"Password"} secureTextEntry={true}/>
-          <Button title="Register" onPress={() => navigation.navigate('HomePage')}/>
+          <Button title="Register" onPress={() => navigation.navigate('HomePage',{dummyData})}/>
         </View>
         <View style={styles.infoCon}>
         <TouchableOpacity onPress={()=>navigation.navigate('Login')}>

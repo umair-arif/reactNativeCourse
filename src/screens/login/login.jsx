@@ -67,12 +67,10 @@ function Login({ navigation }) {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={styles.btnCon} onPress={onLoadingPress}>
-            {isLoading ? (
+          <TouchableOpacity style={styles.btnCon} onPress={()=>navigation.navigate("HomePage",{email,password})}>
+            
               <Text style={styles.btnText}>Login</Text>
-            ) : (
-              <ActivityIndicator />
-            )}
+          
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btnCon}

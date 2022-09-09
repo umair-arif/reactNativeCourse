@@ -5,58 +5,44 @@ import {
   TouchableOpacity,
   StyleSheet,
   Button,
+  FlatList,
 } from "react-native";
-import ConfettiCannon from "react-native-confetti-cannon";
+import { styles } from "./homeStyles";
+function HomePage({ navigation, route }) {
+  const { dummyData } = route.params;
 
-function HomePage() {
-  let explosion;
-  const startExplosion = () => {
-    explosion.start();
-  };
-  const stopExplosion = () => {
-    explosion.stop();
-  };
-  const resumeExplosion = () => {
-    explosion.resume();
-  };
   return (
     <View style={styles.container}>
-      <ConfettiCannon
-        count={200}
-        origin={{ x: -10, y: 0 }}
-        autoStart={false}
-        ref={(ref) => {
-          explosion = ref;
-        }}
-      />
-      <TouchableOpacity onPress={startExplosion} style={styles.button}>
-        <Text>Start</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={stopExplosion} style={styles.button}>
-        <Text>Stop</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={resumeExplosion} style={styles.button}>
-        <Text>Resume</Text>
-      </TouchableOpacity>
+      {/* <FlatList
+        data={dummyData}
+        renderItem={({ item }) => (
+          <View>
+            <Text style={styles.text}>{item.name}</Text>
+            <Text style={styles.text}>{item.age}</Text>
+            <Image
+              source={{ uri: item.img }}
+              style={{ height: 100, width: 100 }}
+            />
+          </View>
+        )}
+      /> */}
+
+      <View>
+        {
+          dummyData.map((user)=>(
+            <>
+            <Text style={styles.text}>{user.name}</Text>
+            <Text style={styles.text}>{user.age}</Text>
+            <Image
+              source={{ uri: user.img }}
+              style={{ height: 100, width: 100 }}
+            />
+            </>
+          ))
+        }
+      </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
-  },
-  button: {
-    backgroundColor:'green',
-        padding:10,
-        margin:7,
-        alignItems: 'center',
-        borderRadius:10,
-        width:150
-  },
-});
 
 export { HomePage };
