@@ -15,6 +15,7 @@ import { useState } from "react";
 import { styles } from "./loginStyles";
 import splash_logo from "../../../assets/images/splash_logo.jpg";
 import { Button } from "../../components/button";
+import { apiHelper } from "../../services/api";
 // it will be always staring a capital letter
 function Login({ navigation }) {
   const [email, setEmail] = useState();
@@ -31,6 +32,15 @@ function Login({ navigation }) {
   };
   const onEyePress = () => {
     setSecurePassword(!securePassword);
+  };
+
+  const attemptToGetUserData = async () => {
+    try {
+      let response = await apiHelper().get("users");
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -67,10 +77,11 @@ function Login({ navigation }) {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={styles.btnCon} onPress={()=>navigation.navigate("HomePage",{email,password})}>
-            
-              <Text style={styles.btnText}>Login</Text>
-          
+          <TouchableOpacity
+            style={styles.btnCon}
+            onPress={() => navigation.navigate("HomePage")}
+          >
+            <Text style={styles.btnText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btnCon}

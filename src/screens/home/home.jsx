@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useEffect, useState, React } from "react";
 import {
   View,
   Image,
@@ -7,40 +9,35 @@ import {
   Button,
   FlatList,
 } from "react-native";
+import { apiHelper } from "../../services/api";
 import { styles } from "./homeStyles";
-function HomePage({ navigation, route }) {
-  const { dummyData } = route.params;
+function HomePage({ navigation }) {
+  const [users, setUsers] = useState();
 
+  useEffect(() => {
+    apiHelper()
+      .get("users")
+      .then((response) => {
+        setUsers(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   return (
     <View style={styles.container}>
-      {/* <FlatList
-        data={dummyData}
+      <FlatList
+        data={users}
         renderItem={({ item }) => (
-          <View>
-            <Text style={styles.text}>{item.name}</Text>
-            <Text style={styles.text}>{item.age}</Text>
+          <View style={styles.list}>
+            <Text style={styles.text}>{item.login}</Text>
             <Image
-              source={{ uri: item.img }}
-              style={{ height: 100, width: 100 }}
+              source={{ uri: item.avatar_url }}
+              style={{ height: 50, width: 50, borderRadius: 25 }}
             />
           </View>
         )}
-      /> */}
-
-      <View>
-        {
-          dummyData.map((user)=>(
-            <>
-            <Text style={styles.text}>{user.name}</Text>
-            <Text style={styles.text}>{user.age}</Text>
-            <Image
-              source={{ uri: user.img }}
-              style={{ height: 100, width: 100 }}
-            />
-            </>
-          ))
-        }
-      </View>
+      />
     </View>
   );
 }
